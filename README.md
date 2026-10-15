@@ -36,75 +36,18 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 현재 버전은 `0.3.1`입니다.
 
-- [Windows x64 무설치 ZIP 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.1/obs-live-editor-0.3.1-windows-x64-portable.zip)
 - [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.1/obs-live-editor-0.3.1-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/obs-live-editor-releases/releases/latest)
-
-> **Defender 안내:** 기존 설치 파일의 `Trojan:Win32/Wacatac.C!ml` 오탐은 Microsoft 재검토 후 해결되었습니다. 보안 기능을 끄거나 예외를 추가하지 말고, 다시 탐지될 경우 [Defender 문제 해결](#다운로드-또는-검사-중-defender가-파일을-차단함)을 확인하세요.
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
 
 ```powershell
-Get-FileHash .\obs-live-editor-*-windows-x64-portable.zip -Algorithm SHA256
+Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
 ```
 
 ## 설치 및 업데이트
 
-### 무설치 ZIP (권장)
-
-1. OBS Studio를 종료합니다.
-2. 무설치 ZIP을 내려받아 압축을 풉니다.
-3. 압축 안의 `bin`, `data`, `obs-plugins` 폴더를 OBS 설치 폴더(기본값: `C:\Program Files\obs-studio`)에 복사합니다.
-4. 파일 복사 중 관리자 권한 요청이 나타나면 승인합니다.
-5. OBS Studio를 다시 실행하고 `도크` 메뉴에서 `라이브 정보 편집`을 엽니다.
-
-<a id="portable-paths"></a>
-<details>
-<summary><strong>폴더 복사 위치 자세히 보기</strong></summary>
-
-압축을 풀면 다음 세 폴더가 보입니다.
-
-```text
-bin
-data
-obs-plugins
-```
-
-개별 DLL만 꺼내지 말고 **세 폴더를 폴더째 모두 선택**하여 OBS 설치 폴더 안에 복사하세요. 기본 설치 위치는 다음과 같습니다.
-
-```text
-C:\Program Files\obs-studio
-```
-
-Windows에서 같은 이름의 폴더가 있다는 메시지가 나타나면 폴더 병합과 파일 덮어쓰기를 허용합니다. 복사가 끝난 뒤 파일 위치는 정확히 다음과 같아야 합니다.
-
-```text
-C:\Program Files\obs-studio\bin\64bit\tls\qschannelbackend.dll
-C:\Program Files\obs-studio\obs-plugins\64bit\obs-live-editor.dll
-C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\locale\ko-KR.ini
-C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\locale\en-US.ini
-```
-
-특히 `qschannelbackend.dll`은 `tls` 폴더 밖으로 따로 옮기면 안 됩니다. 관련 오류는 [`TLS initialization failed` 문제 해결](#로그인할-때-tls-initialization-failed가-표시됨)을 확인하세요.
-
-다음과 같이 폴더가 한 번 더 중복된 경로도 잘못된 설치입니다.
-
-```text
-C:\Program Files\obs-studio\bin\bin\64bit\tls\qschannelbackend.dll
-C:\Program Files\obs-studio\obs-plugins\obs-plugins\64bit\obs-live-editor.dll
-```
-
-문제가 계속되면 OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 열고 아래와 같은 문구가 있는지 확인하세요.
-
-```text
-[obs-live-editor] plugin loaded (version ...)
-```
-
-</details>
-
-### EXE 설치
-
-현재 일부 PC에서 Defender 오탐 사례가 있으므로 가능하면 무설치 ZIP을 사용하세요. EXE가 차단되지 않는 환경에서는 다음 순서로 설치할 수 있습니다.
+### 설치
 
 1. OBS Studio를 종료합니다.
 2. 설치 파일을 내려받아 실행합니다.
@@ -137,32 +80,24 @@ C:\Program Files\obs-studio\obs-plugins\obs-plugins\64bit\obs-live-editor.dll
 
 ## 제거
 
-EXE로 설치했다면 Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거합니다.
-
-무설치 ZIP으로 설치했다면 OBS를 종료한 뒤 다음 파일을 직접 제거합니다.
-
-```text
-C:\Program Files\obs-studio\obs-plugins\64bit\obs-live-editor.dll
-C:\Program Files\obs-studio\bin\64bit\tls\qschannelbackend.dll
-C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\
-```
+Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거합니다.
 
 ## 문제 해결
 
 ### `도크` 메뉴에 `라이브 정보 편집`이 없음
 
 - **확인:** OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 열고 `[obs-live-editor] plugin loaded`를 검색합니다.
-- **해결:** 해당 문구가 없다면 OBS를 완전히 종료한 뒤 [폴더 복사 위치](#portable-paths)에 따라 ZIP의 세 폴더를 다시 복사하고 OBS를 실행합니다.
+- **해결:** OBS를 완전히 종료한 뒤 최신 설치 파일을 다시 실행하고 OBS를 실행합니다.
 
 ### 로그에 이전 플러그인 버전이 표시됨
 
 - **확인:** 로그의 `[obs-live-editor] plugin loaded (version ...)`이 [다운로드](#다운로드)에 표시된 현재 버전과 같은지 확인합니다.
-- **해결:** OBS를 완전히 종료하고 최신 ZIP을 다시 내려받은 뒤 [설치 및 업데이트](#설치-및-업데이트)에 따라 세 폴더를 모두 덮어씁니다. OBS가 실행 중이면 기존 DLL이 교체되지 않을 수 있습니다.
+- **해결:** OBS를 완전히 종료하고 최신 설치 파일을 내려받아 다시 설치합니다. OBS가 실행 중이면 기존 DLL이 교체되지 않을 수 있습니다.
 
 ### 설치 프로그램이 OBS를 찾지 못함
 
-- **확인:** 기본 OBS 설치 폴더인 `C:\Program Files\obs-studio` 안에 `bin\64bit\obs64.exe`가 있는지 확인합니다. 포터블 OBS나 사용자 지정 위치에 설치한 OBS는 EXE 설치 프로그램이 찾지 못할 수 있습니다.
-- **해결:** OBS가 설치되어 있지 않다면 64비트 OBS Studio를 먼저 설치합니다. 포터블 OBS나 사용자 지정 위치를 사용한다면 [무설치 ZIP 설치](#무설치-zip-권장)에 따라 해당 OBS 최상위 폴더에 세 폴더를 직접 복사합니다.
+- **확인:** 기본 OBS 설치 폴더인 `C:\Program Files\obs-studio` 안에 `bin\64bit\obs64.exe`가 있는지 확인합니다. 포터블 OBS는 설치 프로그램이 찾지 못할 수 있습니다.
+- **해결:** OBS가 설치되어 있지 않다면 64비트 OBS Studio를 먼저 설치합니다. 설치된 OBS를 찾지 못한다면 OBS를 정식 설치 프로그램으로 다시 설치한 뒤 플러그인 설치를 재시도합니다.
 
 ### OBS가 실행 중이라는 안내가 표시됨
 
@@ -182,7 +117,7 @@ C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\
   C:\Program Files\obs-studio\bin\64bit\tls\qschannelbackend.dll
   ```
 
-- **해결:** `qschannelbackend.dll`만 따로 옮기지 말고 [폴더 복사 위치](#portable-paths)에 따라 ZIP의 `bin` 폴더를 폴더째 다시 복사한 뒤 OBS를 실행합니다.
+- **해결:** OBS를 완전히 종료한 뒤 최신 설치 파일을 다시 실행하여 필요한 TLS 파일을 복구하고 OBS를 실행합니다.
 
 ### 로그인 버튼을 눌러도 브라우저가 열리지 않음
 
@@ -208,11 +143,6 @@ C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\
 
 - **확인:** [업데이트 확인 방식](#업데이트-확인)에 따라 마지막 확인 후 24시간이 지났는지 확인합니다.
 - **해결:** 인터넷 연결을 확인하고 다음 확인 시점에 OBS를 실행합니다. 새 버전이 있으면 알림의 배포 페이지에서 직접 내려받아 설치합니다.
-
-### 다운로드 또는 검사 중 Defender가 파일을 차단함
-
-- **확인:** Windows 보안의 `바이러스 및 위협 방지 > 보호 기록`에서 탐지 이름과 영향을 받은 파일을 확인합니다.
-- **해결:** 보안 기능을 끄거나 예외를 추가하지 마세요. 최신 파일을 다시 내려받아 검사하고 체크섬을 확인합니다. 계속 차단되면 [무설치 ZIP](#다운로드)을 사용하며, ZIP 내부 파일도 탐지되면 설치를 중단하고 탐지 이름을 포함해 문제를 보고해 주세요.
 
 ## 보안과 소스 코드
 
