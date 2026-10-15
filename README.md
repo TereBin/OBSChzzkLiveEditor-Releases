@@ -34,13 +34,13 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.3.0`입니다.
+현재 버전은 `0.3.1`입니다.
 
-- [Windows x64 무설치 ZIP 바로 다운로드 (권장)](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.0/obs-live-editor-0.3.0-windows-x64-portable.zip)
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.0/obs-live-editor-0.3.0-windows-x64-setup.exe)
+- [Windows x64 무설치 ZIP 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.1/obs-live-editor-0.3.1-windows-x64-portable.zip)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.1/obs-live-editor-0.3.1-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/obs-live-editor-releases/releases/latest)
 
-> **Defender 안내:** EXE 설치 파일이 일부 PC에서 `Trojan:Win32/Wacatac.C!ml`로 오탐되는 사례가 있어 현재는 무설치 ZIP을 권장합니다. Windows 보안 기능을 끄거나 예외를 추가하지 마세요. 자세한 대응 방법은 [Defender 문제 해결](#다운로드-또는-검사-중-defender가-파일을-차단함)을 확인하세요.
+> **Defender 안내:** 기존 설치 파일의 `Trojan:Win32/Wacatac.C!ml` 오탐은 Microsoft 재검토 후 해결되었습니다. 보안 기능을 끄거나 예외를 추가하지 말고, 다시 탐지될 경우 [Defender 문제 해결](#다운로드-또는-검사-중-defender가-파일을-차단함)을 확인하세요.
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
 
@@ -169,6 +169,11 @@ C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\
 - **확인:** 작업 표시줄과 시스템 트레이에 OBS가 남아 있는지 확인합니다. 작업 관리자에서 `obs64.exe`가 실행 중인지도 확인합니다.
 - **해결:** OBS를 완전히 종료한 뒤 설치 파일을 다시 실행합니다. 설치 프로그램의 종료 요청이 표시되면 작업을 저장하고 OBS 종료를 허용합니다.
 
+### 설치 후 OBS 실행 시 `Create Process 실패: 코드 740`이 표시됨
+
+- **확인:** 설치 완료 화면에서 OBS 실행을 선택한 직후 `요청한 작업을 수행하려면 권한 상승이 필요합니다`가 표시되는지 확인합니다. OBS Crash 로그의 충돌 스택에 `AcLayers.dll`이 나타날 수도 있습니다.
+- **해결:** `0.3.1` 이상 설치 파일을 사용합니다. 이전 설치 파일에서 발생했다면 설치는 이미 완료된 상태이므로 설치 창을 닫고 시작 메뉴나 기존 바로가기에서 OBS를 직접 실행합니다. `obs64.exe`의 속성에서 호환성 모드 또는 `관리자 권한으로 이 프로그램 실행`이 켜져 있다면 해제합니다.
+
 ### 로그인할 때 `TLS initialization failed`가 표시됨
 
 - **확인:** 로그에 `No functional TLS backend was found` 또는 `No TLS backend is available`이 있는지 확인합니다. 다음 파일도 확인합니다.
@@ -207,7 +212,7 @@ C:\Program Files\obs-studio\data\obs-plugins\obs-live-editor\
 ### 다운로드 또는 검사 중 Defender가 파일을 차단함
 
 - **확인:** Windows 보안의 `바이러스 및 위협 방지 > 보호 기록`에서 탐지 이름과 영향을 받은 파일을 확인합니다.
-- **해결:** 보안 기능을 끄거나 예외를 추가하지 마세요. EXE가 차단되면 [무설치 ZIP](#다운로드)을 사용하고 체크섬을 확인합니다. ZIP 내부 파일도 탐지되면 설치를 중단하고 탐지 이름을 포함해 문제를 보고해 주세요.
+- **해결:** 보안 기능을 끄거나 예외를 추가하지 마세요. 최신 파일을 다시 내려받아 검사하고 체크섬을 확인합니다. 계속 차단되면 [무설치 ZIP](#다운로드)을 사용하며, ZIP 내부 파일도 탐지되면 설치를 중단하고 탐지 이름을 포함해 문제를 보고해 주세요.
 
 ## 보안과 소스 코드
 
