@@ -19,6 +19,10 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 - 브라우저를 이용한 치지직 OAuth 로그인
 - 현재 로그인한 치지직 채널명 표시
 - Access Token 자동 갱신
+- `INVALID_TOKEN` 발생 시 토큰 갱신 후 요청 1회 자동 복구
+- Worker, TLS, 토큰, 방송 설정 API 연결 진단
+- 방송 정보 변경 전 비교와 적용 후 서버 값 검증
+- 제목 글자 수와 태그 유효성 실시간 표시
 - 도크 너비에 맞춘 반응형 배치
 - Windows DPAPI를 이용한 로그인 토큰 암호화 저장
 - 새 버전 자동 확인 및 중요도별 업데이트 알림
@@ -34,9 +38,9 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.3.1`입니다.
+현재 버전은 `0.3.3`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.1/obs-live-editor-0.3.1-windows-x64-setup.exe)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.3/obs-live-editor-0.3.3-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/obs-live-editor-releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
@@ -51,9 +55,10 @@ Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
 
 1. OBS Studio를 종료합니다.
 2. 설치 파일을 내려받아 실행합니다.
-3. 관리자 권한 요청을 승인하고 설치를 완료합니다.
-4. OBS Studio를 다시 실행합니다.
-5. OBS의 `도크` 메뉴에서 `라이브 정보 편집`을 엽니다.
+3. 자동으로 표시된 OBS Studio 폴더를 확인합니다. 사용자 지정 위치라면 `bin`, `data`, `obs-plugins` 폴더가 있는 OBS 최상위 폴더를 선택합니다.
+4. 관리자 권한 요청을 승인하고 설치를 완료합니다.
+5. OBS Studio를 다시 실행합니다.
+6. OBS의 `도크` 메뉴에서 `라이브 정보 편집`을 엽니다.
 
 ### 업데이트 확인
 
@@ -67,14 +72,20 @@ Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
 2. 브라우저에 로그인 완료 화면이 표시되면 OBS로 돌아옵니다.
 3. 도크에 로그인한 채널 정보가 표시되는지 확인합니다.
 
-한 번 로그인하면 Access Token이 만료되기 전에 자동으로 갱신됩니다. 직접 로그아웃하거나 인증이 만료된 경우에만 다시 로그인하면 됩니다.
+한 번 로그인하면 Access Token이 만료되기 전에 자동으로 갱신됩니다. API 요청에서 `INVALID_TOKEN`이 반환되면 토큰을 갱신하고 해당 요청을 한 번 자동 재시도합니다. Refresh Token까지 만료된 경우에만 다시 로그인하면 됩니다.
 
-### 2. 방송 정보 설정
+### 2. 연결 진단
+
+도크 상단의 `진단`을 누르면 토큰 중계 Worker, TLS, 로그인 토큰, 치지직 방송 설정 API 연결을 순서대로 확인합니다. 실패 항목과 오류 문구가 도크에 표시되며, 진단 과정에서 Access Token이 무효하면 한 번 자동 복구를 시도합니다.
+
+### 3. 방송 정보 설정
 
 1. 방송 제목을 입력합니다.
 2. 카테고리 이름을 두 글자 이상 입력하고 검색 결과에서 선택합니다.
-3. 태그는 쉼표로 구분해 입력합니다.
-4. `적용`을 눌러 변경 내용을 저장합니다.
+3. 태그는 쉼표로 구분해 입력합니다. 태그 개수와 유효성이 입력란 아래에 표시됩니다.
+4. 제목 오른쪽의 글자 수와 `변경 예정` 항목을 확인합니다.
+5. `적용`을 누르고 변경 전후 비교 창에서 내용을 확인합니다.
+6. 적용 후 플러그인이 서버 값을 다시 불러와 실제 반영 여부를 검증합니다.
 
 `새로고침`은 현재 방송 정보를 다시 불러옵니다. 카테고리 오른쪽의 초기화 버튼을 누른 뒤 적용하면 카테고리가 제거됩니다.
 
@@ -97,7 +108,7 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거�
 ### 설치 프로그램이 OBS를 찾지 못함
 
 - **확인:** 기본 OBS 설치 폴더인 `C:\Program Files\obs-studio` 안에 `bin\64bit\obs64.exe`가 있는지 확인합니다. 포터블 OBS는 설치 프로그램이 찾지 못할 수 있습니다.
-- **해결:** OBS가 설치되어 있지 않다면 64비트 OBS Studio를 먼저 설치합니다. 설치된 OBS를 찾지 못한다면 OBS를 정식 설치 프로그램으로 다시 설치한 뒤 플러그인 설치를 재시도합니다.
+- **해결:** OBS가 설치되어 있지 않다면 64비트 OBS Studio를 먼저 설치합니다. 사용자 지정 위치나 포터블 OBS라면 설치 화면에서 `bin\64bit\obs64.exe`가 들어 있는 OBS 최상위 폴더를 직접 선택합니다.
 
 ### OBS가 실행 중이라는 안내가 표시됨
 
@@ -137,7 +148,7 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거�
 ### 방송 정보가 적용되지 않음
 
 - **확인:** 로그인 상태인지, 방송 제목이 비어 있지 않은지, 카테고리를 검색 결과에서 선택했는지 확인합니다. 태그에는 글자와 숫자만 사용할 수 있습니다.
-- **해결:** `새로고침`으로 현재 방송 정보를 다시 불러온 뒤 값을 수정하고 `적용`을 누릅니다. 오류가 계속되면 로그와 도크의 오류 문구를 함께 확인합니다.
+- **해결:** 먼저 `진단`을 실행합니다. `새로고침`으로 현재 방송 정보를 다시 불러온 뒤 값을 수정하고 `적용`을 누릅니다. `INVALID_TOKEN`은 한 번 자동 복구되며, 계속 실패하면 로그아웃 후 다시 로그인합니다.
 
 ### 새 버전 알림이 표시되지 않음
 
@@ -156,7 +167,7 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거�
 
 오류 보고와 기능 제안은 [Live Editor for OBS Issues](https://github.com/TereBin/obs-live-editor/issues)를 이용해 주세요. 공개 이슈 작성이 어렵거나 개별 문의가 필요하면 [Discord에서 TereBin에게 문의](https://discordapp.com/users/537256771501424640)할 수 있습니다.
 
-OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 선택하고 문제 발생 직후의 로그에서 `obs-live-editor`, `TLS`, `qschannelbackend`가 포함된 줄과 도크의 오류 문구를 함께 제공하면 원인 확인이 빠릅니다.
+OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 선택하고 문제 발생 직후의 로그에서 `obs-live-editor`, `TLS`, `qschannelbackend`가 포함된 줄, `진단` 결과와 도크의 오류 문구를 함께 제공하면 원인 확인이 빠릅니다.
 
 어느 경로로 문의하더라도 Access Token, Refresh Token, Client Secret 또는 `credentials.bin` 파일은 절대 첨부하거나 전송하지 마세요.
 
