@@ -38,10 +38,10 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.3.4`입니다.
+현재 버전은 `0.3.5`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.4/OBSChzzkLiveEditor-0.3.4-windows-x64-setup.exe)
-- [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/obs-live-editor-releases/releases/latest)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.3.5/OBSChzzkLiveEditor-0.3.5-windows-x64-setup.exe)
+- [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
 
@@ -161,11 +161,11 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `OBSChzzkLiveEditor`를 제거�
 
 로그인을 시작할 때 Worker가 발급하는 OAuth state는 서버에 저장되지 않는 서명된 값이며 5분 동안만 유효합니다. 인증 코드와 토큰은 요청을 처리하는 동안 치지직과 플러그인 사이에서 전달될 뿐 Worker에 영구 저장되지 않습니다.
 
-소스 코드, 빌드 방법, Worker 구성은 [obs-live-editor 소스 저장소](https://github.com/TereBin/obs-live-editor)에서 확인할 수 있습니다. 이 프로그램은 GPL-2.0 라이선스로 배포됩니다.
+소스 코드, 빌드 방법, Worker 구성은 [OBSChzzkLiveEditor 소스 저장소](https://github.com/TereBin/OBSChzzkLiveEditor)에서 확인할 수 있습니다. 이 프로그램은 GPL-2.0 라이선스로 배포됩니다.
 
 ## 문제 보고
 
-오류 보고와 기능 제안은 [OBSChzzkLiveEditor Issues](https://github.com/TereBin/obs-live-editor/issues)를 이용해 주세요. 공개 이슈 작성이 어렵거나 개별 문의가 필요하면 [Discord에서 TereBin에게 문의](https://discordapp.com/users/537256771501424640)할 수 있습니다.
+오류 보고와 기능 제안은 [OBSChzzkLiveEditor Issues](https://github.com/TereBin/OBSChzzkLiveEditor/issues)를 이용해 주세요. 공개 이슈 작성이 어렵거나 개별 문의가 필요하면 [Discord에서 TereBin에게 문의](https://discordapp.com/users/537256771501424640)할 수 있습니다.
 
 OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 선택하고 문제 발생 직후의 로그에서 `obs-live-editor`, `TLS`, `qschannelbackend`가 포함된 줄, `진단` 결과와 도크의 오류 문구를 함께 제공하면 원인 확인이 빠릅니다.
 
