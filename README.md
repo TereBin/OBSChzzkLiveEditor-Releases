@@ -1,4 +1,4 @@
-# Live Editor for OBS
+# OBSChzzkLiveEditor
 
 OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 있는 Windows용 플러그인입니다.
 
@@ -38,15 +38,15 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.3.3`입니다.
+현재 버전은 `0.3.4`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.3/obs-live-editor-0.3.3-windows-x64-setup.exe)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/obs-live-editor-releases/releases/download/v0.3.4/OBSChzzkLiveEditor-0.3.4-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/obs-live-editor-releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
 
 ```powershell
-Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
+Get-FileHash .\OBSChzzkLiveEditor-*-windows-x64-setup.exe -Algorithm SHA256
 ```
 
 ## 설치 및 업데이트
@@ -58,7 +58,7 @@ Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
 3. 자동으로 표시된 OBS Studio 폴더를 확인합니다. 사용자 지정 위치라면 `bin`, `data`, `obs-plugins` 폴더가 있는 OBS 최상위 폴더를 선택합니다.
 4. 관리자 권한 요청을 승인하고 설치를 완료합니다.
 5. OBS Studio를 다시 실행합니다.
-6. OBS의 `도크` 메뉴에서 `라이브 정보 편집`을 엽니다.
+6. OBS의 `도크` 메뉴에서 `OBSChzzkLiveEditor`를 엽니다.
 
 ### 업데이트 확인
 
@@ -91,18 +91,18 @@ Get-FileHash .\obs-live-editor-*-windows-x64-setup.exe -Algorithm SHA256
 
 ## 제거
 
-Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거합니다.
+Windows의 `설정 > 앱 > 설치된 앱`에서 `OBSChzzkLiveEditor`를 제거합니다.
 
 ## 문제 해결
 
-### `도크` 메뉴에 `라이브 정보 편집`이 없음
+### `도크` 메뉴에 `OBSChzzkLiveEditor`가 없음
 
-- **확인:** OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 열고 `[obs-live-editor] plugin loaded`를 검색합니다.
+- **확인:** OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 열고 `[OBSChzzkLiveEditor] plugin loaded`를 검색합니다.
 - **해결:** OBS를 완전히 종료한 뒤 최신 설치 파일을 다시 실행하고 OBS를 실행합니다.
 
 ### 로그에 이전 플러그인 버전이 표시됨
 
-- **확인:** 로그의 `[obs-live-editor] plugin loaded (version ...)`이 [다운로드](#다운로드)에 표시된 현재 버전과 같은지 확인합니다.
+- **확인:** 로그의 `[OBSChzzkLiveEditor] plugin loaded (version ...)`이 [다운로드](#다운로드)에 표시된 현재 버전과 같은지 확인합니다.
 - **해결:** OBS를 완전히 종료하고 최신 설치 파일을 내려받아 다시 설치합니다. OBS가 실행 중이면 기존 DLL이 교체되지 않을 수 있습니다.
 
 ### 설치 프로그램이 OBS를 찾지 못함
@@ -165,7 +165,7 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `Live Editor for OBS`를 제거�
 
 ## 문제 보고
 
-오류 보고와 기능 제안은 [Live Editor for OBS Issues](https://github.com/TereBin/obs-live-editor/issues)를 이용해 주세요. 공개 이슈 작성이 어렵거나 개별 문의가 필요하면 [Discord에서 TereBin에게 문의](https://discordapp.com/users/537256771501424640)할 수 있습니다.
+오류 보고와 기능 제안은 [OBSChzzkLiveEditor Issues](https://github.com/TereBin/obs-live-editor/issues)를 이용해 주세요. 공개 이슈 작성이 어렵거나 개별 문의가 필요하면 [Discord에서 TereBin에게 문의](https://discordapp.com/users/537256771501424640)할 수 있습니다.
 
 OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 선택하고 문제 발생 직후의 로그에서 `obs-live-editor`, `TLS`, `qschannelbackend`가 포함된 줄, `진단` 결과와 도크의 오류 문구를 함께 제공하면 원인 확인이 빠릅니다.
 
@@ -173,5 +173,5 @@ OBS에서 `도움말 > 로그 파일 > 현재 로그 보기`를 선택하고 문
 
 ## 후원
 
-Live Editor for OBS가 도움이 되었다면 [Ko-fi에서 TereBin 후원하기](https://ko-fi.com/terebin)를
+OBSChzzkLiveEditor가 도움이 되었다면 [Ko-fi에서 TereBin 후원하기](https://ko-fi.com/terebin)를
 통해 개발을 응원할 수 있습니다.

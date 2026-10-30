@@ -1,7 +1,7 @@
 {
-  "latestVersion": "0.3.3",
+  "latestVersion": "0.3.4",
   "minimumSupportedVersion": "0.1.0",
   "level": "optional",
-  "message": "0.3.3에서 연결 진단, INVALID_TOKEN 자동 복구, 변경 전후 비교와 설치기 검증을 추가했습니다.",
+  "message": "프로그램 이름을 OBSChzzkLiveEditor로 변경하고 기존 설치에서 안전하게 전환되도록 개선했습니다.",
   "releaseUrl": "https://github.com/TereBin/obs-live-editor-releases/releases/latest"
 }
