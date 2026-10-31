@@ -38,9 +38,9 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.3.5`입니다.
+현재 버전은 `0.3.6`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.3.5/OBSChzzkLiveEditor-0.3.5-windows-x64-setup.exe)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.3.6/OBSChzzkLiveEditor-0.3.6-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
