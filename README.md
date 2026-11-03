@@ -20,10 +20,12 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 - 현재 로그인한 치지직 채널명 표시
 - Access Token 자동 갱신
 - `INVALID_TOKEN` 발생 시 토큰 갱신 후 요청 1회 자동 복구
-- Worker, TLS, 토큰, 방송 설정 API 연결 진단
+- Worker, TLS, 토큰, 방송 설정 API와 업데이트 서버 연결 진단
 - 방송 정보 변경 전 비교와 적용 후 서버 값 검증
 - 제목 글자 수와 태그 유효성 실시간 표시
 - 도크 너비에 맞춘 반응형 배치
+- 미적용 변경 사항이 있을 때 새로고침, 로그아웃 및 도크 닫기 전 확인
+- 치지직 API 요청 제한 시 잠시 기다린 뒤 1회 자동 재시도
 - Windows DPAPI를 이용한 로그인 토큰 암호화 저장
 - 새 버전 자동 확인 및 중요도별 업데이트 알림
 - 운영 공지 배너와 중요 알림창
@@ -32,15 +34,15 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 ## 요구 사항
 
 - Windows 10 또는 Windows 11 64비트
-- OBS Studio 32.2.2 이상 64비트
+- OBS Studio 33.0.0 이상 64비트
 - 치지직 스트리머 계정
 - 인터넷 연결
 
 ## 다운로드
 
-현재 버전은 `0.3.6`입니다.
+현재 버전은 `0.4.0`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.3.6/OBSChzzkLiveEditor-0.3.6-windows-x64-setup.exe)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.4.0/OBSChzzkLiveEditor-0.4.0-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
@@ -55,10 +57,12 @@ Get-FileHash .\OBSChzzkLiveEditor-*-windows-x64-setup.exe -Algorithm SHA256
 
 1. OBS Studio를 종료합니다.
 2. 설치 파일을 내려받아 실행합니다.
-3. 자동으로 표시된 OBS Studio 폴더를 확인합니다. 사용자 지정 위치라면 `bin`, `data`, `obs-plugins` 폴더가 있는 OBS 최상위 폴더를 선택합니다.
+3. 자동으로 표시된 OBS Studio 폴더를 확인합니다. 포터블 OBS에 설치할 때만 `포터블 OBS의 plugins 폴더에 설치`를 선택합니다.
 4. 관리자 권한 요청을 승인하고 설치를 완료합니다.
 5. OBS Studio를 다시 실행합니다.
 6. OBS의 `도크` 메뉴에서 `OBSChzzkLiveEditor`를 엽니다.
+
+일반 설치에서는 OBS 33의 공식 새 구조인 `C:\ProgramData\obs-studio\plugins\OBSChzzkLiveEditor`에 설치됩니다. 기존 `C:\Program Files\obs-studio\obs-plugins`의 레거시 파일은 업데이트할 때 자동으로 정리됩니다.
 
 ### 업데이트 확인
 
@@ -76,7 +80,7 @@ Get-FileHash .\OBSChzzkLiveEditor-*-windows-x64-setup.exe -Algorithm SHA256
 
 ### 2. 연결 진단
 
-도크 상단의 `진단`을 누르면 토큰 중계 Worker, TLS, 로그인 토큰, 치지직 방송 설정 API 연결을 순서대로 확인합니다. 실패 항목과 오류 문구가 도크에 표시되며, 진단 과정에서 Access Token이 무효하면 한 번 자동 복구를 시도합니다.
+도크 상단의 `진단`을 누르면 토큰 중계 Worker, TLS, 로그인 토큰, 치지직 방송 설정 API와 업데이트 서버 연결을 확인합니다. 실패 항목과 오류 문구가 도크에 표시되며, 진단 과정에서 Access Token이 무효하면 한 번 자동 복구를 시도합니다.
 
 ### 3. 방송 정보 설정
 
@@ -88,6 +92,8 @@ Get-FileHash .\OBSChzzkLiveEditor-*-windows-x64-setup.exe -Algorithm SHA256
 6. 적용 후 플러그인이 서버 값을 다시 불러와 실제 반영 여부를 검증합니다.
 
 `새로고침`은 현재 방송 정보를 다시 불러옵니다. 카테고리 오른쪽의 초기화 버튼을 누른 뒤 적용하면 카테고리가 제거됩니다.
+
+방송 정보를 수정한 뒤 아직 적용하지 않았다면 새로고침, 로그아웃 또는 도크 닫기 전에 확인 창이 표시됩니다. 실제 변경 사항이 없을 때는 `적용` 버튼이 비활성화됩니다.
 
 ## 제거
 
@@ -125,7 +131,7 @@ Windows의 `설정 > 앱 > 설치된 앱`에서 `OBSChzzkLiveEditor`를 제거�
 - **확인:** 로그에 `No functional TLS backend was found` 또는 `No TLS backend is available`이 있는지 확인합니다. 다음 파일도 확인합니다.
 
   ```text
-  C:\Program Files\obs-studio\bin\64bit\tls\qschannelbackend.dll
+  C:\ProgramData\obs-studio\plugins\OBSChzzkLiveEditor\tls\qschannelbackend.dll
   ```
 
 - **해결:** OBS를 완전히 종료한 뒤 최신 설치 파일을 다시 실행하여 필요한 TLS 파일을 복구하고 OBS를 실행합니다.
