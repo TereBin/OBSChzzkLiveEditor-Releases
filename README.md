@@ -23,7 +23,7 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 - Worker, TLS, 토큰, 방송 설정 API와 업데이트 서버 연결 진단
 - 방송 정보 변경 전 비교와 적용 후 서버 값 검증
 - 제목 글자 수와 태그 유효성 실시간 표시
-- 도크 너비에 맞춘 반응형 배치
+- 도크 너비에 맞춘 반응형 배치와 낮은 높이에서의 내부 스크롤
 - 미적용 변경 사항이 있을 때 새로고침, 로그아웃 및 도크 닫기 전 확인
 - 치지직 API 요청 제한 시 잠시 기다린 뒤 1회 자동 재시도
 - Windows DPAPI를 이용한 로그인 토큰 암호화 저장
@@ -40,9 +40,9 @@ OBS Studio에서 치지직 방송 제목, 카테고리, 태그를 수정할 수 
 
 ## 다운로드
 
-현재 버전은 `0.4.0`입니다.
+현재 버전은 `0.4.1`입니다.
 
-- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.4.0/OBSChzzkLiveEditor-0.4.0-windows-x64-setup.exe)
+- [Windows x64 설치 파일 바로 다운로드](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/download/v0.4.1/OBSChzzkLiveEditor-0.4.1-windows-x64-setup.exe)
 - [최신 릴리스 페이지와 변경 사항 보기](https://github.com/TereBin/OBSChzzkLiveEditor-Releases/releases/latest)
 
 다운로드한 파일의 무결성은 [SHA256SUMS.txt](./SHA256SUMS.txt)와 비교할 수 있습니다.
